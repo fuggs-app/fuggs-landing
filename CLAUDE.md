@@ -12,12 +12,12 @@ Fuggs Landing Page is a static landing page for Fuggs, an intelligent open-sourc
 ```bash
 npm run dev                      # Start Python HTTP server on port 8001
 npm start                        # Alias for npm run dev
-cd site && ./dev.sh              # Bash script alternative (port 8001 default)
-cd site && ./dev.sh 3000         # Custom port
+./dev.sh                         # Bash script (port 8001 default)
+./dev.sh 3000                    # Custom port
 cd site && python3 -m http.server 8001  # Direct Python command
 ```
 
-**Important:** Always run a local web server (not `file://` protocol) to avoid CORS issues with ES6 modules. The site files are in the `site/` directory.
+**Important:** Always run a local web server (not `file://` protocol) to avoid CORS issues with ES6 modules. The site files are in the `site/` directory. The root `dev.sh` is a wrapper that automatically runs the server from the correct directory.
 
 ### Docker Commands
 ```bash
@@ -96,6 +96,10 @@ fuggs-landing/
 │   ├── Dockerfile         # Nginx alpine production image
 │   ├── .dockerignore      # Docker ignore patterns
 │   └── dev.sh             # Development server script
+├── portainer/             # Docker Compose stacks for Portainer
+│   ├── site/              # Landing page deployment config
+│   └── listmonk/          # Newsletter service deployment config
+├── dev.sh                 # Development server wrapper (calls site/dev.sh)
 ├── CLAUDE.md              # Development documentation (this file)
 ├── README.md              # User-facing documentation
 └── package.json           # npm scripts only (no dependencies)

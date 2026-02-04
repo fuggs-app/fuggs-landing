@@ -9,7 +9,8 @@ Built with native Web Components, Tailwind CSS, and zero build process.
 ```bash
 # Development server
 npm run dev                    # Port 8001
-cd site && ./dev.sh            # Alternative
+./dev.sh                       # Alternative (port 8001)
+./dev.sh 3000                  # Custom port
 
 # Docker
 npm run docker:dev             # Port 8080
