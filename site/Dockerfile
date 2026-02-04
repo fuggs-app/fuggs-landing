@@ -6,7 +6,6 @@ COPY index.html /usr/share/nginx/html/
 COPY css/ /usr/share/nginx/html/css/
 COPY js/ /usr/share/nginx/html/js/
 COPY assets/ /usr/share/nginx/html/assets/
-COPY README.md /usr/share/nginx/html/
 
 # Copy custom nginx configuration (optional)
 # COPY nginx.conf /etc/nginx/nginx.conf
