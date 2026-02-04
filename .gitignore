@@ -28,3 +28,11 @@ yarn-error.log*
 # Build artifacts (if any)
 dist/
 build/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Claude Code
+.claude/

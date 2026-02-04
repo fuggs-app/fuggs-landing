@@ -1,0 +1,77 @@
+# Listmonk - Newsletter and Mailing List Manager
+# Domain: newsletter.hopps.de
+# Network: nginx-proxy-manager (external)
+
+x-db-credentials: &db-credentials
+  POSTGRES_USER: &db-user ${DB_USER}
+  POSTGRES_PASSWORD: &db-password ${DB_PASSWORD}
+  POSTGRES_DB: &db-name ${DB_NAME}
+
+services:
+  # Listmonk app
+  app:
+    image: listmonk/listmonk:latest
+    container_name: listmonk_app
+    restart: unless-stopped
+    networks:
+      - listmonk
+      - nginx-proxy-manager
+    hostname: newsletter.hopps.de
+    depends_on:
+      db:
+        condition: service_healthy
+    command: [sh, -c, "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"]
+    environment:
+      # App configuration
+      LISTMONK_app__address: 0.0.0.0:9000
+
+      # Database configuration
+      LISTMONK_db__user: *db-user
+      LISTMONK_db__password: *db-password
+      LISTMONK_db__database: *db-name
+      LISTMONK_db__host: db
+      LISTMONK_db__port: 5432
+      LISTMONK_db__ssl_mode: disable
+      LISTMONK_db__max_open: 25
+      LISTMONK_db__max_idle: 25
+      LISTMONK_db__max_lifetime: 300s
+
+      # Timezone
+      TZ: ${TZ:-Europe/Berlin}
+
+      # Admin credentials (only used on first setup)
+      LISTMONK_ADMIN_USER: ${LISTMONK_ADMIN_USER}
+      LISTMONK_ADMIN_PASSWORD: ${LISTMONK_ADMIN_PASSWORD}
+    volumes:
+      - /opt/listmonk/uploads:/listmonk/uploads:rw
+    labels:
+      # Labels for nginx-proxy-manager
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  # PostgreSQL database
+  db:
+    image: postgres:17-alpine
+    container_name: listmonk_db
+    restart: unless-stopped
+    networks:
+      - listmonk
+    environment:
+      <<: *db-credentials
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    volumes:
+      - /opt/listmonk/db:/var/lib/postgresql/data
+
+networks:
+  listmonk:
+    name: listmonk
+    driver: bridge
+
+  nginx-proxy-manager:
+    external: true
+
+# Note: No named volumes - all data is stored on host at /opt/listmonk/
+# This ensures better data safety and easier backups
