@@ -47,10 +47,15 @@ fuggs-landing/
 │   ├── js/                  # JavaScript modules
 │   ├── assets/images/       # Logo & graphics
 │   └── Dockerfile           # Site container image
-├── portainer/               # Docker Compose stacks
-│   ├── docker-compose.yml   # Listmonk newsletter service
-│   ├── .env.example         # Environment variables template
-│   └── README.md            # Deployment documentation
+├── portainer/               # Docker Compose stacks for Portainer
+│   ├── site/                # Landing page deployment
+│   │   ├── docker-compose.yml
+│   │   └── README.md
+│   ├── listmonk/            # Newsletter service deployment
+│   │   ├── docker-compose.yml
+│   │   ├── .env.example
+│   │   └── README.md
+│   └── README.md            # Deployment overview
 ├── CLAUDE.md                 # Development documentation
 ├── README.md                 # This file
 └── package.json              # Scripts

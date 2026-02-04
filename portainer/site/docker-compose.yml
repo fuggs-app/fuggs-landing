@@ -1,0 +1,25 @@
+# Fuggs Landing Page
+# Domain: fuggs.app
+# Network: nginx-proxy-manager (external)
+
+services:
+  landing:
+    build:
+      context: ../../site
+      dockerfile: Dockerfile
+    image: fuggs-landing:latest
+    container_name: fuggs_landing
+    restart: unless-stopped
+    networks:
+      - nginx-proxy-manager
+    hostname: fuggs.app
+    labels:
+      # Labels for watchtower auto-updates
+      - "com.centurylinklabs.watchtower.enable=true"
+
+networks:
+  nginx-proxy-manager:
+    external: true
+
+# Note: No ports exposed - proxied through nginx-proxy-manager
+# The nginx container serves static files from /usr/share/nginx/html/
