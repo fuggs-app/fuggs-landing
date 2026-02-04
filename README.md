@@ -9,7 +9,7 @@ Built with native Web Components, Tailwind CSS, and zero build process.
 ```bash
 # Development server
 npm run dev                    # Port 8001
-./dev.sh                       # Alternative
+cd site && ./dev.sh            # Alternative
 
 # Docker
 npm run docker:dev             # Port 8080
@@ -41,12 +41,15 @@ Deploy to GitHub Pages, Netlify, Vercel, or any static host - no build step need
 
 ```
 fuggs-landing/
-├── index.html                # Main page
-├── css/styles.css            # Design tokens & custom styles
-├── js/
-│   ├── main.js              # Global features
-│   └── components/          # Web Components
-└── assets/images/           # Logo & graphics
+├── site/                     # Landing page website
+│   ├── index.html           # Main page
+│   ├── css/styles.css       # Design tokens & custom styles
+│   ├── js/                  # JavaScript modules
+│   ├── assets/images/       # Logo & graphics
+│   └── Dockerfile           # Site container image
+├── CLAUDE.md                 # Development documentation
+├── README.md                 # This file
+└── package.json              # Scripts
 ```
 
 ## Links

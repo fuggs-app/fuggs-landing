@@ -10,18 +10,18 @@ Fuggs Landing Page is a static landing page for Fuggs, an intelligent open-sourc
 
 ### Local Development Server
 ```bash
-npm run dev              # Start Python HTTP server on port 8001
-npm start                # Alias for npm run dev
-./dev.sh                 # Bash script alternative (port 8001 default)
-./dev.sh 3000            # Custom port
-python3 -m http.server 8001  # Direct Python command
+npm run dev                      # Start Python HTTP server on port 8001
+npm start                        # Alias for npm run dev
+cd site && ./dev.sh              # Bash script alternative (port 8001 default)
+cd site && ./dev.sh 3000         # Custom port
+cd site && python3 -m http.server 8001  # Direct Python command
 ```
 
-**Important:** Always run a local web server (not `file://` protocol) to avoid CORS issues with ES6 modules.
+**Important:** Always run a local web server (not `file://` protocol) to avoid CORS issues with ES6 modules. The site files are in the `site/` directory.
 
 ### Docker Commands
 ```bash
-npm run docker:build    # Build Docker image
+npm run docker:build    # Build Docker image (builds from site/ directory)
 npm run docker:run      # Run container on port 8080
 npm run docker:dev      # Build and run combined
 ```
@@ -33,9 +33,9 @@ npm run docker:dev      # Build and run combined
 The codebase uses **native Custom Elements API** (Web Components v1) without any framework. All components are autonomous custom elements that encapsulate their own HTML, styling, and behavior.
 
 **Component Loading Pattern:**
-1. Components are loaded as ES6 modules at the bottom of `index.html`
+1. Components are loaded as ES6 modules at the bottom of `site/index.html`
 2. Each component extends `HTMLElement` and self-registers via `customElements.define()`
-3. `main.js` waits for all components to be defined using `customElements.whenDefined()` before initializing global features
+3. `site/js/main.js` waits for all components to be defined using `customElements.whenDefined()` before initializing global features
 
 **Component Structure:**
 - Components render by setting `this.innerHTML` in `connectedCallback()`
@@ -44,16 +44,16 @@ The codebase uses **native Custom Elements API** (Web Components v1) without any
 - Components can accept attributes via `this.getAttribute()`
 
 **Available Components:**
-- `<fuggs-nav>` - Navigation with mobile menu and scroll behavior (js/components/fuggs-nav.js:6-111)
+- `<fuggs-nav>` - Navigation with mobile menu and scroll behavior (site/js/components/fuggs-nav.js:6-111)
 - `<fuggs-hero>` - Hero section with gradient background
-- `<fuggs-feature-card>` - Reusable feature cards with icon attribute system (js/components/fuggs-feature-card.js:6-66)
+- `<fuggs-feature-card>` - Reusable feature cards with icon attribute system (site/js/components/fuggs-feature-card.js:6-66)
 - `<fuggs-how-step>` - Numbered process steps
 - `<fuggs-cta-section>` - Call-to-action with email signup
 - `<fuggs-footer>` - Footer with dynamic copyright year
 
 ### Global Features (main.js)
 
-`js/main.js` provides two main features after component initialization:
+`site/js/main.js` provides two main features after component initialization:
 
 1. **Smooth Scrolling:** Handles anchor link clicks with offset for fixed navigation (64px)
 2. **Scroll Animations:** Uses Intersection Observer to trigger `.fade-in` animations with one-time observation
@@ -61,8 +61,8 @@ The codebase uses **native Custom Elements API** (Web Components v1) without any
 ### Styling Architecture
 
 **CSS Organization:**
-- `css/styles.css` - Contains CSS custom properties (design tokens) and reusable component styles
-- Tailwind CSS via CDN with custom config in `index.html` head
+- `site/css/styles.css` - Contains CSS custom properties (design tokens) and reusable component styles
+- Tailwind CSS via CDN with custom config in `site/index.html` head
 - Custom Tailwind config extends theme with Fuggs brand colors and IBM Plex Sans font
 
 **Design Tokens (CSS Custom Properties):**
@@ -85,13 +85,19 @@ Content is in **German** (lang="de"). When modifying text content, maintain Germ
 
 ```
 fuggs-landing/
-├── index.html              # Main page (component declarations, Tailwind config)
-├── css/styles.css          # Design tokens and custom styles
-├── js/
-│   ├── main.js            # Global initialization, smooth scroll, animations
-│   └── components/        # Web Components (ES6 modules)
-├── assets/images/         # Logo and graphics (SVG format)
-├── Dockerfile             # Nginx alpine production image
+├── site/                   # Landing page website
+│   ├── index.html         # Main page (component declarations, Tailwind config)
+│   ├── css/
+│   │   └── styles.css     # Design tokens and custom styles
+│   ├── js/
+│   │   ├── main.js        # Global initialization, smooth scroll, animations
+│   │   └── components/    # Web Components (ES6 modules)
+│   ├── assets/images/     # Logo and graphics (SVG format)
+│   ├── Dockerfile         # Nginx alpine production image
+│   ├── .dockerignore      # Docker ignore patterns
+│   └── dev.sh             # Development server script
+├── CLAUDE.md              # Development documentation (this file)
+├── README.md              # User-facing documentation
 └── package.json           # npm scripts only (no dependencies)
 ```
 
@@ -99,18 +105,18 @@ fuggs-landing/
 
 ### Adding New Icons to Feature Cards
 
-Icons are defined in `fuggs-feature-card.js` within the `getIcon()` method. To add new icons:
+Icons are defined in `site/js/components/fuggs-feature-card.js` within the `getIcon()` method. To add new icons:
 
 1. Add SVG markup to the `icons` object in `getIcon()` method
 2. Use the icon by passing the key as the `icon` attribute: `<fuggs-feature-card icon="new-icon" ...>`
 
 ### Modifying Navigation Links
 
-Navigation items are hardcoded in `fuggs-nav.js` HTML template. Menu appears in both desktop and mobile versions - update both sections when changing links.
+Navigation items are hardcoded in `site/js/components/fuggs-nav.js` HTML template. Menu appears in both desktop and mobile versions - update both sections when changing links.
 
 ### Brand Color Changes
 
-Update CSS custom properties in `css/styles.css` `:root` selector AND the Tailwind config in `index.html` script block to maintain consistency.
+Update CSS custom properties in `site/css/styles.css` `:root` selector AND the Tailwind config in `site/index.html` script block to maintain consistency.
 
 ## Deployment Notes
 
@@ -141,7 +147,7 @@ Sticky navigation bar with logo, menu links, and CTA button.
 - Auto-close menu on link click
 - Mobile menu toggles via `#mobile-menu-btn`
 
-**Customization:** Edit `js/components/fuggs-nav.js` template to change menu items or links.
+**Customization:** Edit `site/js/components/fuggs-nav.js` template to change menu items or links.
 
 ---
 
@@ -275,7 +281,7 @@ Site footer with links, logo, and copyright.
 
 Update **both** locations:
 
-1. **CSS Variables** in `css/styles.css`:
+1. **CSS Variables** in `site/css/styles.css`:
 ```css
 :root {
   --fuggs-primary: #FF521D;
@@ -284,7 +290,7 @@ Update **both** locations:
 }
 ```
 
-2. **Tailwind Config** in `index.html` head:
+2. **Tailwind Config** in `site/index.html` head:
 ```javascript
 tailwind.config = {
   theme: {
@@ -300,7 +306,7 @@ tailwind.config = {
 
 ### Adding New Feature Card Icons
 
-Edit `js/components/fuggs-feature-card.js` in the `getIcon()` method:
+Edit `site/js/components/fuggs-feature-card.js` in the `getIcon()` method:
 
 ```javascript
 getIcon(iconName) {
@@ -316,13 +322,13 @@ Then use: `<fuggs-feature-card icon="your-new-icon" ...>`
 
 ### Modifying Navigation
 
-Navigation items are in `js/components/fuggs-nav.js` template. Update **both** desktop and mobile menu sections when adding/removing links.
+Navigation items are in `site/js/components/fuggs-nav.js` template. Update **both** desktop and mobile menu sections when adding/removing links.
 
 ### Changing Content
 
-- **Page content:** Edit `index.html` sections directly
-- **Component content:** Edit respective component files in `js/components/`
-- **Meta tags:** Update `index.html` head section for SEO/OG tags
+- **Page content:** Edit `site/index.html` sections directly
+- **Component content:** Edit respective component files in `site/js/components/`
+- **Meta tags:** Update `site/index.html` head section for SEO/OG tags
 
 ## Deployment Options
 
@@ -336,7 +342,7 @@ docker run -p 8080:80 ghcr.io/fuggs-app/fuggs-landing:latest
 
 **Build Custom Image:**
 ```bash
-docker build -t fuggs-landing .
+docker build -t fuggs-landing site/
 docker run -p 8080:80 fuggs-landing
 ```
 
@@ -408,7 +414,7 @@ server {
 
 **Solutions:**
 1. Verify Tailwind CDN is accessible (check Network tab)
-2. Confirm `css/styles.css` loads successfully
+2. Confirm `site/css/styles.css` loads successfully
 3. Clear browser cache (Ctrl+Shift+R / Cmd+Shift+R)
 4. Check for JavaScript errors that might block rendering
 
@@ -417,17 +423,17 @@ server {
 **Symptoms:** Broken logo or missing images
 
 **Solutions:**
-1. Verify `assets/images/logo.svg` exists
-2. Check file paths are correct (relative to `index.html`)
+1. Verify `site/assets/images/logo.svg` exists
+2. Check file paths are correct (relative to `site/index.html`)
 3. Ensure web server serves SVG with correct MIME type (`image/svg+xml`)
-4. For Docker, verify files are copied correctly in Dockerfile
+4. For Docker, verify files are copied correctly in site/Dockerfile
 
 ### Mobile Menu Not Working
 
 **Symptoms:** Hamburger menu doesn't toggle
 
 **Solutions:**
-1. Check `fuggs-nav.js` loaded and initialized
+1. Check `site/js/components/fuggs-nav.js` loaded and initialized
 2. Verify event listeners are attached (check console for errors)
 3. Inspect element IDs match: `#mobile-menu-btn` and `#mobile-menu`
 
