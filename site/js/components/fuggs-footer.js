@@ -72,8 +72,8 @@ class FuggsFooter extends HTMLElement {
           <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
             <p>&copy; ${currentYear} Fuggs. Open Source unter <a href="https://github.com/fuggs-app/fuggs/blob/main/LICENSE" target="_blank" rel="noopener" class="text-fuggs-orange hover:underline">MIT Lizenz</a>.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-              <a href="/privacy" class="hover:text-fuggs-orange transition-colors">Datenschutz</a>
-              <a href="/imprint" class="hover:text-fuggs-orange transition-colors">Impressum</a>
+              <a href="/impressum.html" class="hover:text-fuggs-orange transition-colors">Impressum</a>
+              <a href="/datenschutz.html" class="hover:text-fuggs-orange transition-colors">Datenschutz</a>
             </div>
           </div>
         </div>
