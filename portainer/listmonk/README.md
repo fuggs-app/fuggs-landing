@@ -1,6 +1,6 @@
 # Listmonk - Newsletter & Mailing List Manager
 
-This directory contains the Docker Compose configuration for deploying Listmonk on `newsletter.hopps.de`.
+This directory contains the Docker Compose configuration for deploying Listmonk on `newsletter.fuggs.de`.
 
 ## Prerequisites
 
@@ -50,7 +50,7 @@ TZ=Europe/Berlin
 After the stack is deployed, configure NPM to proxy to the service:
 
 1. **Proxy Host:**
-   - Domain: `newsletter.hopps.de`
+   - Domain: `newsletter.fuggs.de`
    - Scheme: `http`
    - Forward Hostname: `listmonk_app`
    - Forward Port: `9000`
@@ -62,7 +62,7 @@ After the stack is deployed, configure NPM to proxy to the service:
 
 ### 4. First Login
 
-1. Visit `https://newsletter.hopps.de`
+1. Visit `https://newsletter.fuggs.de`
 2. Login with the admin credentials you set in the environment variables
 3. Go to **Settings → Media** and change the upload path to: `/listmonk/uploads`
 
@@ -99,7 +99,7 @@ Listmonk automatically runs database migrations on startup. To update:
 - **Networks**:
   - `listmonk` (internal)
   - `nginx-proxy-manager` (external)
-- **Domain**: newsletter.hopps.de
+- **Domain**: newsletter.fuggs.de
 - **Internal Port**: 9000 (not exposed externally)
 
 ## Troubleshooting

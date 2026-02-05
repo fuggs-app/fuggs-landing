@@ -10,7 +10,7 @@ portainer/
 │   ├── docker-compose.yml  # Landing page service (fuggs.app)
 │   └── README.md           # Deployment documentation
 └── listmonk/               # Newsletter service
-    ├── docker-compose.yml  # Listmonk service (newsletter.hopps.de)
+    ├── docker-compose.yml  # Listmonk service (newsletter.fuggs.de)
     ├── .env.example        # Environment variables template
     └── README.md           # Deployment documentation
 ```
@@ -25,7 +25,7 @@ portainer/
 - **Secrets**: None required
 
 ### Listmonk (`listmonk/`)
-- **Domain**: newsletter.hopps.de
+- **Domain**: newsletter.fuggs.de
 - **Purpose**: Newsletter and mailing list management
 - **Technology**: Listmonk + PostgreSQL 17
 - **Network**: nginx-proxy-manager
@@ -86,7 +86,7 @@ After deploying each stack, configure NPM proxy hosts:
 - SSL: Let's Encrypt
 - Enable: Force SSL, HTTP/2, HSTS, Block Common Exploits
 
-### Listmonk (newsletter.hopps.de)
+### Listmonk (newsletter.fuggs.de)
 - Forward Hostname: `listmonk_app`
 - Forward Port: `9000`
 - SSL: Let's Encrypt

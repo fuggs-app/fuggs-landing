@@ -1,5 +1,5 @@
 # Listmonk - Newsletter and Mailing List Manager
-# Domain: newsletter.hopps.de
+# Domain: newsletter.fuggs.de
 # Network: nginx-proxy-manager (external)
 
 x-db-credentials: &db-credentials
@@ -16,7 +16,7 @@ services:
     networks:
       - listmonk
       - nginx-proxy-manager
-    hostname: newsletter.hopps.de
+    hostname: newsletter.fuggs.de
     depends_on:
       db:
         condition: service_healthy
