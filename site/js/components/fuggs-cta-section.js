@@ -17,16 +17,41 @@ class FuggsCtaSection extends HTMLElement {
             und erhalten Sie als Erste:r Zugang zur Public Beta.
           </p>
 
-          <!-- Email Signup Form -->
+          <!-- Newsletter Signup Form (Listmonk) -->
           <div class="max-w-md mx-auto mb-8">
-            <form class="flex flex-col sm:flex-row gap-4" id="cta-form">
-              <input
-                type="email"
-                name="email"
-                placeholder="Ihre E-Mail-Adresse"
-                required
-                class="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-              >
+            <form method="post" action="https://newsletter.fuggs.de/subscription/form" class="listmonk-form flex flex-col gap-4">
+              <input type="hidden" name="nonce" />
+
+              <div class="flex flex-col sm:flex-row gap-4">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Ihre E-Mail-Adresse"
+                  required
+                  class="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+                />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name (optional)"
+                  class="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+                />
+              </div>
+
+              <div class="flex items-center justify-center gap-2">
+                <input
+                  id="fuggs-betalist"
+                  type="checkbox"
+                  name="l"
+                  checked
+                  value="80666e36-7523-4afa-a897-1a0f3c67f90d"
+                  class="w-4 h-4 text-fuggs-orange bg-white border-gray-300 rounded focus:ring-2 focus:ring-white"
+                />
+                <label for="fuggs-betalist" class="text-sm font-medium">
+                  Fuggs Beta-Liste (Produktupdates & Early Access)
+                </label>
+              </div>
+
               <button
                 type="submit"
                 class="bg-white text-fuggs-orange px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
@@ -42,35 +67,6 @@ class FuggsCtaSection extends HTMLElement {
         </div>
       </section>
     `;
-
-    // Setup form handler
-    this.setupFormHandler();
-  }
-
-  setupFormHandler() {
-    const form = this.querySelector('#cta-form');
-    if (form) {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = form.querySelector('input[type="email"]').value;
-
-        // TODO: Integrate with your newsletter service (e.g., Mailchimp, SendGrid, etc.)
-        // For now, show success message
-        console.log('Newsletter signup:', email);
-
-        // Show success message
-        const formContainer = form.parentElement;
-        formContainer.innerHTML = `
-          <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg p-8 text-center">
-            <svg class="w-16 h-16 text-white mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <h3 class="text-2xl font-bold mb-2">Vielen Dank!</h3>
-            <p class="text-lg">Wir haben Ihre Anmeldung erhalten. Sie erhalten in Kürze eine E-Mail mit weiteren Informationen zur Public Beta.</p>
-          </div>
-        `;
-      });
-    }
   }
 }
 
