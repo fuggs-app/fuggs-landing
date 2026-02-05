@@ -1,21 +1,10 @@
-# Fuggs Landing Page
-# Domain: fuggs.de
-# Network: nginx-proxy-manager (external)
-
 services:
   landing:
-    image: fuggs-landing:latest
+    image: ghcr.io/fuggs-app/fuggs-landing:latest
     container_name: fuggs_landing
     restart: unless-stopped
     networks:
       - nginx-proxy-manager
-    labels:
-      # Labels for watchtower auto-updates
-      - "com.centurylinklabs.watchtower.enable=true"
-
 networks:
   nginx-proxy-manager:
     external: true
-
-# Note: No ports exposed - proxied through nginx-proxy-manager
-# The nginx container serves static files from /usr/share/nginx/html/
