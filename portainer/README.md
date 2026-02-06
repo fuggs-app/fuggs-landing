@@ -7,7 +7,7 @@ This directory contains Docker Compose configurations for deploying Fuggs servic
 ```
 portainer/
 ├── site/                    # Fuggs landing page
-│   ├── docker-compose.yml  # Landing page service (fuggs.app)
+│   ├── docker-compose.yml  # Landing page service (fuggs.de)
 │   └── README.md           # Deployment documentation
 └── listmonk/               # Newsletter service
     ├── docker-compose.yml  # Listmonk service (newsletter.fuggs.de)
@@ -18,7 +18,7 @@ portainer/
 ## Services Overview
 
 ### Landing Page (`site/`)
-- **Domain**: fuggs.app
+- **Domain**: fuggs.de
 - **Purpose**: Main Fuggs landing page
 - **Technology**: Static site (Nginx + Web Components)
 - **Network**: nginx-proxy-manager
@@ -80,7 +80,7 @@ sudo chown -R 1000:1000 /opt/listmonk
 
 After deploying each stack, configure NPM proxy hosts:
 
-### Landing Page (fuggs.app)
+### Landing Page (fuggs.de)
 - Forward Hostname: `fuggs_landing`
 - Forward Port: `80`
 - SSL: Let's Encrypt

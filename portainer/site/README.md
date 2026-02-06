@@ -1,6 +1,6 @@
 # Fuggs Landing Page
 
-This directory contains the Docker Compose configuration for deploying the Fuggs landing page on `fuggs.app`.
+This directory contains the Docker Compose configuration for deploying the Fuggs landing page on `fuggs.de`.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ This directory contains the Docker Compose configuration for deploying the Fuggs
 After the stack is deployed, configure NPM to proxy to the service:
 
 1. **Proxy Host:**
-   - Domain: `fuggs.app`
+   - Domain: `fuggs.de`
    - Scheme: `http`
    - Forward Hostname: `fuggs_landing`
    - Forward Port: `80`
@@ -38,17 +38,17 @@ After the stack is deployed, configure NPM to proxy to the service:
 
 ### 3. Optional: WWW Redirect
 
-To redirect `www.fuggs.app` to `fuggs.app`:
+To redirect `www.fuggs.de` to `fuggs.de`:
 
 1. Add another Proxy Host in NPM
-2. Domain: `www.fuggs.app`
+2. Domain: `www.fuggs.de`
 3. Scheme: `http`
 4. Forward Hostname: `fuggs_landing`
 5. Forward Port: `80`
 6. SSL: Same certificate or request new one
 7. In the Advanced tab, add custom Nginx configuration:
    ```nginx
-   return 301 https://fuggs.app$request_uri;
+   return 301 https://fuggs.de$request_uri;
    ```
 
 ## Service Details
@@ -56,7 +56,7 @@ To redirect `www.fuggs.app` to `fuggs.app`:
 - **Container**: `fuggs_landing`
 - **Base Image**: `nginx:alpine`
 - **Network**: `nginx-proxy-manager` (external)
-- **Domain**: fuggs.app
+- **Domain**: fuggs.de
 - **Internal Port**: 80 (not exposed externally)
 - **Content**: Static HTML/CSS/JS (Web Components)
 
