@@ -4,9 +4,9 @@
 
 services:
   landing:
-    # Using 'latest' tag (auto-updates with new releases)
-    # For production stability, use: ghcr.io/fuggs-app/fuggs-landing:1.0.0
-    image: ghcr.io/fuggs-app/fuggs-landing:latest
+    # Using specific version for production stability
+    # Update this tag when deploying new releases
+    image: ghcr.io/fuggs-app/fuggs-landing:1.1.0
 
     container_name: fuggs_landing
     restart: unless-stopped
