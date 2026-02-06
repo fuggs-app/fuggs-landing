@@ -1,9 +1,14 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image (Development)
+
+# This workflow builds development images on every push to main
+# For production releases, use the release.yml workflow with semver tags
 
 on:
   push:
     branches:
       - main
+    tags-ignore:
+      - 'v*.*.*'  # Don't run on version tags (release.yml handles those)
   workflow_dispatch:
 
 env:

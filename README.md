@@ -31,12 +31,37 @@ Visit http://localhost:8001 or http://localhost:8080
 
 **Docker (Recommended):**
 ```bash
+# Use specific version for production (recommended)
+docker pull ghcr.io/fuggs-app/fuggs-landing:1.0.0
+docker run -p 8080:80 ghcr.io/fuggs-app/fuggs-landing:1.0.0
+
+# Or use latest (auto-updates)
 docker pull ghcr.io/fuggs-app/fuggs-landing:latest
 docker run -p 8080:80 ghcr.io/fuggs-app/fuggs-landing:latest
 ```
 
+**Docker Compose / Portainer:**
+See examples in `portainer/site/` directory.
+
 **Static Hosting:**
 Deploy to GitHub Pages, Netlify, Vercel, or any static host - no build step needed.
+
+## Releases
+
+This project follows [Semantic Versioning](https://semver.org/). To create a new release:
+
+```bash
+# Patch release (1.0.0 → 1.0.1)
+npm run release:patch
+
+# Minor release (1.0.0 → 1.1.0)
+npm run release:minor
+
+# Major release (1.0.0 → 2.0.0)
+npm run release:major
+```
+
+See [RELEASE.md](RELEASE.md) for detailed release process documentation.
 
 ## Project Structure
 

@@ -1,10 +1,19 @@
+# Fuggs Landing - Docker Compose
+# NOTE: For production, consider using docker-compose.versioned.yml with a specific version tag
+# This file uses 'latest' which auto-updates but may cause unexpected changes
+
 services:
   landing:
+    # Using 'latest' tag (auto-updates with new releases)
+    # For production stability, use: ghcr.io/fuggs-app/fuggs-landing:1.0.0
     image: ghcr.io/fuggs-app/fuggs-landing:latest
+
     container_name: fuggs_landing
     restart: unless-stopped
+
     networks:
       - nginx-proxy-manager
+
 networks:
   nginx-proxy-manager:
     external: true

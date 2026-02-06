@@ -1,0 +1,27 @@
+# Fuggs Landing - Versioned Docker Compose
+# This example uses a specific version tag for production stability
+
+services:
+  landing:
+    # Use specific version for production (change this when updating)
+    image: ghcr.io/fuggs-app/fuggs-landing:1.0.0
+
+    container_name: fuggs_landing
+    restart: unless-stopped
+
+    # Optional: Resource limits
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.5'
+    #       memory: 256M
+    #     reservations:
+    #       cpus: '0.1'
+    #       memory: 64M
+
+    networks:
+      - nginx-proxy-manager
+
+networks:
+  nginx-proxy-manager:
+    external: true
