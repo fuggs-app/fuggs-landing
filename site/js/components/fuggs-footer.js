@@ -33,11 +33,6 @@ class FuggsFooter extends HTMLElement {
                     Contributing Guide
                   </a>
                 </li>
-                <li>
-                  <a href="https://github.com/fuggs-app/fuggs/discussions" target="_blank" rel="noopener" class="hover:text-fuggs-orange transition-colors">
-                    Discussions
-                  </a>
-                </li>
               </ul>
             </div>
 
