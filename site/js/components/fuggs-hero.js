@@ -18,8 +18,8 @@ class FuggsHero extends HTMLElement {
             </div>
 
             <!-- Main Headline -->
-            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gray-900 hyphens-auto">
-              Vereinsbuchhaltung. <span class="text-fuggs-orange">Intelligent.</span> Einfach.
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gray-900 hyphens-auto leading-tight">
+              Vereinsbuchhaltung.<br/><span class="text-fuggs-orange">Intelligent.</span><br/>Einfach.
             </h1>
 
             <!-- Subheadline -->
