@@ -1,13 +1,13 @@
 # Fuggs Landing - Docker Compose
 # Domain: fuggs.de
 # Network: nginx-proxy-manager (external)
-# NOTE: Using versioned tag (1.1.0) for production stability
+# NOTE: Using versioned tag (1.2.0) for production stability
 
 services:
   landing:
     # Using specific version for production stability
     # Update this tag when deploying new releases
-    image: ghcr.io/fuggs-app/fuggs-landing:1.1.0
+    image: ghcr.io/fuggs-app/fuggs-landing:1.2.0
 
     container_name: fuggs_landing
     restart: unless-stopped
