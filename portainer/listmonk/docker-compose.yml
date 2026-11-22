@@ -55,6 +55,7 @@ services:
     restart: unless-stopped
     networks:
       - listmonk
+      - databasus
     environment:
       <<: *db-credentials
     healthcheck:
@@ -71,6 +72,8 @@ networks:
     driver: bridge
 
   nginx-proxy-manager:
+    external: true
+  databasus:
     external: true
 
 # Note: No named volumes - all data is stored on host at /opt/listmonk/
