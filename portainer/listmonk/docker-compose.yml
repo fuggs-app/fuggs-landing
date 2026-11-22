@@ -53,9 +53,16 @@ services:
     image: postgres:17-alpine
     container_name: listmonk_db
     restart: unless-stopped
+    # databasus is a routed bridge (10.0.104.0/24) reached from the Databasus
+    # backup service on herhoffer.net via a Hetzner network route. Publishing
+    # 5432 without a host port only opens it on that routed network.
+    ports:
+      - "0.0.0.0::5432"
     networks:
-      - listmonk
-      - databasus
+      listmonk: {}
+      databasus:
+        ipv4_address: 10.0.104.11
+        gw_priority: 10
     environment:
       <<: *db-credentials
     healthcheck:
